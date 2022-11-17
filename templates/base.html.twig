@@ -2,8 +2,16 @@
 <html>
     <head>
         <meta charset="UTF-8">
+<<<<<<< HEAD
     <title>
         {% block title %}MAGIC PARK
+=======
+        <title>{% block title %}Bojour!{% endblock %}</title>
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}
+>>>>>>> 7e9c27637bc5be94a67316c28e3be110fd14be1d
         {% endblock %}
     </title>
         <link rel="stylesheet" href="https://bootswatch.com/4/cyborg/bootstrap.min.css">
