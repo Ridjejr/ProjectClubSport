@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\AdherentRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -61,6 +63,22 @@ class Adherent
      * @ORM\Column(type="string", length=255)
      */
     private $ville;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Entrainement::class, mappedBy="Adherent")
+     */
+    private $entrainements;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Reservation::class, inversedBy="adherents")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $Reservation;
+
+    public function __construct()
+    {
+        $this->entrainements = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -171,6 +189,45 @@ class Adherent
     public function setVille(string $ville): self
     {
         $this->ville = $ville;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Entrainement>
+     */
+    public function getEntrainements(): Collection
+    {
+        return $this->entrainements;
+    }
+
+    public function addEntrainement(Entrainement $entrainement): self
+    {
+        if (!$this->entrainements->contains($entrainement)) {
+            $this->entrainements[] = $entrainement;
+            $entrainement->addAdherent($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEntrainement(Entrainement $entrainement): self
+    {
+        if ($this->entrainements->removeElement($entrainement)) {
+            $entrainement->removeAdherent($this);
+        }
+
+        return $this;
+    }
+
+    public function getReservation(): ?Reservation
+    {
+        return $this->Reservation;
+    }
+
+    public function setReservation(?Reservation $Reservation): self
+    {
+        $this->Reservation = $Reservation;
 
         return $this;
     }

@@ -37,6 +37,17 @@ class Club
      */
     private $ville;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Reservation::class, inversedBy="Club")
+     */
+    private $reservation;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Coach::class, inversedBy="clubs")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $Coach;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -86,6 +97,30 @@ class Club
     public function setVille(string $ville): self
     {
         $this->ville = $ville;
+
+        return $this;
+    }
+
+    public function getReservation(): ?Reservation
+    {
+        return $this->reservation;
+    }
+
+    public function setReservation(?Reservation $reservation): self
+    {
+        $this->reservation = $reservation;
+
+        return $this;
+    }
+
+    public function getCoach(): ?Coach
+    {
+        return $this->Coach;
+    }
+
+    public function setCoach(?Coach $Coach): self
+    {
+        $this->Coach = $Coach;
 
         return $this;
     }
