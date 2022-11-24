@@ -14,7 +14,7 @@ class Adherent
 {
     /**
      * @ORM\Id
-     * @ORM\GeneratedValue
+     * @ORM\GeneratedValue(strategy="NONE")
      * @ORM\Column(type="integer")
      */
     private $id;
@@ -75,6 +75,11 @@ class Adherent
      */
     private $Reservation;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $image;
+
     public function __construct()
     {
         $this->entrainements = new ArrayCollection();
@@ -85,6 +90,13 @@ class Adherent
         return $this->id;
     }
 
+    public function setId(int $id): self
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+    
     public function getNom(): ?string
     {
         return $this->nom;
@@ -228,6 +240,18 @@ class Adherent
     public function setReservation(?Reservation $Reservation): self
     {
         $this->Reservation = $Reservation;
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(string $image): self
+    {
+        $this->image = $image;
 
         return $this;
     }
