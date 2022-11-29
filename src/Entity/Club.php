@@ -2,8 +2,10 @@
 
 namespace App\Entity;
 
-use App\Repository\ClubRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+
 
 /**
  * @ORM\Entity(repositoryClass=ClubRepository::class)
@@ -20,7 +22,7 @@ class Club
     /**
      * @ORM\Column(type="integer")
      */
-    private $N°rue;
+    private $NumRue;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -37,16 +39,23 @@ class Club
      */
     private $ville;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Reservation::class, inversedBy="Club")
-     */
-    private $reservation;
 
     /**
      * @ORM\ManyToOne(targetEntity=Coach::class, inversedBy="clubs")
      * @ORM\JoinColumn(nullable=false)
      */
     private $Coach;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Reservation::class, mappedBy="club")
+     */
+    private $reservation;
+
+    public function __construct()
+    {
+        $this->reservation = new ArrayCollection();
+    }
+
 
     public function getId(): ?int
     {
@@ -60,14 +69,14 @@ class Club
         return $this;
     }
 
-    public function getN°rue(): ?int
+    public function getNumRue(): ?int
     {
-        return $this->N°rue;
+        return $this->NumRue;
     }
 
-    public function setN°rue(int $N°rue): self
+    public function setNumRue(int $NumRue): self
     {
-        $this->N°rue = $N°rue;
+        $this->NumRue = $NumRue;
 
         return $this;
     }
@@ -108,17 +117,6 @@ class Club
         return $this;
     }
 
-    public function getReservation(): ?Reservation
-    {
-        return $this->reservation;
-    }
-
-    public function setReservation(?Reservation $reservation): self
-    {
-        $this->reservation = $reservation;
-
-        return $this;
-    }
 
     public function getCoach(): ?Coach
     {
@@ -131,4 +129,35 @@ class Club
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, Reservation>
+     */
+    public function getReservation(): Collection
+    {
+        return $this->reservation;
+    }
+
+    public function addReservation(Reservation $reservation): self
+    {
+        if (!$this->reservation->contains($reservation)) {
+            $this->reservation[] = $reservation;
+            $reservation->setClub($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReservation(Reservation $reservation): self
+    {
+        if ($this->reservation->removeElement($reservation)) {
+            // set the owning side to null (unless already changed)
+            if ($reservation->getClub() === $this) {
+                $reservation->setClub(null);
+            }
+        }
+
+        return $this;
+    }
+
 }

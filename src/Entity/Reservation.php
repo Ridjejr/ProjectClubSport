@@ -2,9 +2,7 @@
 
 namespace App\Entity;
 
-use App\Repository\ReservationRepository;
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -29,25 +27,34 @@ class Reservation
      */
     private $HeureR;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Adherent::class, mappedBy="Reservation")
-     */
-    private $adherents;
-
-    /**
-     * @ORM\OneToMany(targetEntity=Club::class, mappedBy="reservation")
-     */
-    private $Club;
 
     /**
      * @ORM\OneToMany(targetEntity=Coach::class, mappedBy="Reservation")
      */
     private $coaches;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Adherent::class, inversedBy="reservations")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $adherent;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Coach::class, inversedBy="reservations")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $coach;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Club::class, inversedBy="reservation")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $club;
+
+
     public function __construct()
     {
         $this->adherents = new ArrayCollection();
-        $this->Club = new ArrayCollection();
         $this->coaches = new ArrayCollection();
     }
 
@@ -87,93 +94,40 @@ class Reservation
         return $this;
     }
 
-    /**
-     * @return Collection<int, Adherent>
-     */
-    public function getAdherents(): Collection
+    public function getAdherent(): ?Adherent
     {
-        return $this->adherents;
+        return $this->adherent;
     }
 
-    public function addAdherent(Adherent $adherent): self
+    public function setAdherent(?Adherent $adherent): self
     {
-        if (!$this->adherents->contains($adherent)) {
-            $this->adherents[] = $adherent;
-            $adherent->setReservation($this);
-        }
+        $this->adherent = $adherent;
 
         return $this;
     }
 
-    public function removeAdherent(Adherent $adherent): self
+    public function getCoach(): ?Coach
     {
-        if ($this->adherents->removeElement($adherent)) {
-            // set the owning side to null (unless already changed)
-            if ($adherent->getReservation() === $this) {
-                $adherent->setReservation(null);
-            }
-        }
+        return $this->coach;
+    }
+
+    public function setCoach(?Coach $coach): self
+    {
+        $this->coach = $coach;
 
         return $this;
     }
 
-    /**
-     * @return Collection<int, Club>
-     */
-    public function getClub(): Collection
+    public function getClub(): ?Club
     {
-        return $this->Club;
+        return $this->club;
     }
 
-    public function addClub(Club $club): self
+    public function setClub(?Club $club): self
     {
-        if (!$this->Club->contains($club)) {
-            $this->Club[] = $club;
-            $club->setReservation($this);
-        }
+        $this->club = $club;
 
         return $this;
     }
 
-    public function removeClub(Club $club): self
-    {
-        if ($this->Club->removeElement($club)) {
-            // set the owning side to null (unless already changed)
-            if ($club->getReservation() === $this) {
-                $club->setReservation(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Coach>
-     */
-    public function getCoaches(): Collection
-    {
-        return $this->coaches;
-    }
-
-    public function addCoach(Coach $coach): self
-    {
-        if (!$this->coaches->contains($coach)) {
-            $this->coaches[] = $coach;
-            $coach->setReservation($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCoach(Coach $coach): self
-    {
-        if ($this->coaches->removeElement($coach)) {
-            // set the owning side to null (unless already changed)
-            if ($coach->getReservation() === $this) {
-                $coach->setReservation(null);
-            }
-        }
-
-        return $this;
-    }
 }

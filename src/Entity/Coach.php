@@ -34,15 +34,21 @@ class Coach
      */
     private $clubs;
 
+
     /**
-     * @ORM\ManyToOne(targetEntity=Reservation::class, inversedBy="coaches")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\Column(type="string", length=255)
      */
-    private $Reservation;
+    private $image;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Reservation::class, mappedBy="coach")
+     */
+    private $reservations;
 
     public function __construct()
     {
         $this->clubs = new ArrayCollection();
+        $this->reservations = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -111,14 +117,45 @@ class Coach
         return $this;
     }
 
-    public function getReservation(): ?Reservation
+
+    public function getImage(): ?string
     {
-        return $this->Reservation;
+        return $this->image;
     }
 
-    public function setReservation(?Reservation $Reservation): self
+    public function setImage(string $image): self
     {
-        $this->Reservation = $Reservation;
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Reservation>
+     */
+    public function getReservations(): Collection
+    {
+        return $this->reservations;
+    }
+
+    public function addReservation(Reservation $reservation): self
+    {
+        if (!$this->reservations->contains($reservation)) {
+            $this->reservations[] = $reservation;
+            $reservation->setCoach($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReservation(Reservation $reservation): self
+    {
+        if ($this->reservations->removeElement($reservation)) {
+            // set the owning side to null (unless already changed)
+            if ($reservation->getCoach() === $this) {
+                $reservation->setCoach(null);
+            }
+        }
 
         return $this;
     }

@@ -47,7 +47,7 @@ class Adherent
     /**
      * @ORM\Column(type="integer")
      */
-    private $N°rue;
+    private $NumRue;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -69,20 +69,21 @@ class Adherent
      */
     private $entrainements;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Reservation::class, inversedBy="adherents")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $Reservation;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
     private $image;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Reservation::class, mappedBy="adherent")
+     */
+    private $reservations;
+
     public function __construct()
     {
         $this->entrainements = new ArrayCollection();
+        $this->reservations = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -157,14 +158,14 @@ class Adherent
         return $this;
     }
 
-    public function getN°rue(): ?int
+    public function getNumRue(): ?int
     {
-        return $this->N°rue;
+        return $this->NumRue;
     }
 
-    public function setN°rue(int $N°rue): self
+    public function setNumRue(int $NumRue): self
     {
-        $this->N°rue = $N°rue;
+        $this->NumRue = $NumRue;
 
         return $this;
     }
@@ -232,17 +233,6 @@ class Adherent
         return $this;
     }
 
-    public function getReservation(): ?Reservation
-    {
-        return $this->Reservation;
-    }
-
-    public function setReservation(?Reservation $Reservation): self
-    {
-        $this->Reservation = $Reservation;
-
-        return $this;
-    }
 
     public function getImage(): ?string
     {
@@ -252,6 +242,36 @@ class Adherent
     public function setImage(string $image): self
     {
         $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Reservation>
+     */
+    public function getReservations(): Collection
+    {
+        return $this->reservations;
+    }
+
+    public function addReservation(Reservation $reservation): self
+    {
+        if (!$this->reservations->contains($reservation)) {
+            $this->reservations[] = $reservation;
+            $reservation->setAdherent($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReservation(Reservation $reservation): self
+    {
+        if ($this->reservations->removeElement($reservation)) {
+            // set the owning side to null (unless already changed)
+            if ($reservation->getAdherent() === $this) {
+                $reservation->setAdherent(null);
+            }
+        }
 
         return $this;
     }

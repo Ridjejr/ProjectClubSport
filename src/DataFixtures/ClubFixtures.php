@@ -14,13 +14,12 @@ class ClubsFixtures extends Fixture
        
         $faker=Factory::create("fr_FR");
         $clubs=new Club();
-        $clubs  -> setId
-                -> setN°rue($faker->buildingNumber())
+        $clubs  -> setId(intval($faker->buildingNumber()))
+                -> setNumRue($faker->buildingNumber())
                 -> setRue($faker->streetName())
                 -> setCP($faker->numberBetween(01000,95000))
                 -> setVille($faker->city());
         $manager->persist($clubs);
-        
 
         $manager->flush(); 
     }
