@@ -29,11 +29,6 @@ class Coach
      */
     private $prenom;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Club::class, mappedBy="Coach")
-     */
-    private $clubs;
-
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -44,6 +39,12 @@ class Coach
      * @ORM\OneToMany(targetEntity=Reservation::class, mappedBy="coach")
      */
     private $reservations;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Club::class, inversedBy="club")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $club;
 
     public function __construct()
     {
@@ -87,35 +88,6 @@ class Coach
         return $this;
     }
 
-    /**
-     * @return Collection<int, Club>
-     */
-    public function getClubs(): Collection
-    {
-        return $this->clubs;
-    }
-
-    public function addClub(Club $club): self
-    {
-        if (!$this->clubs->contains($club)) {
-            $this->clubs[] = $club;
-            $club->setCoach($this);
-        }
-
-        return $this;
-    }
-
-    public function removeClub(Club $club): self
-    {
-        if ($this->clubs->removeElement($club)) {
-            // set the owning side to null (unless already changed)
-            if ($club->getCoach() === $this) {
-                $club->setCoach(null);
-            }
-        }
-
-        return $this;
-    }
 
 
     public function getImage(): ?string
@@ -156,6 +128,18 @@ class Coach
                 $reservation->setCoach(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getClub(): ?Club
+    {
+        return $this->club;
+    }
+
+    public function setClub(?Club $club): self
+    {
+        $this->club = $club;
 
         return $this;
     }

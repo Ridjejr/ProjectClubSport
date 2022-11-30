@@ -41,19 +41,19 @@ class Club
 
 
     /**
-     * @ORM\ManyToOne(targetEntity=Coach::class, inversedBy="clubs")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $Coach;
-
-    /**
      * @ORM\OneToMany(targetEntity=Reservation::class, mappedBy="club")
      */
     private $reservation;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Coach::class, mappedBy="club")
+     */
+    private $club;
+
     public function __construct()
     {
         $this->reservation = new ArrayCollection();
+        $this->club = new ArrayCollection();
     }
 
 
@@ -118,18 +118,6 @@ class Club
     }
 
 
-    public function getCoach(): ?Coach
-    {
-        return $this->Coach;
-    }
-
-    public function setCoach(?Coach $Coach): self
-    {
-        $this->Coach = $Coach;
-
-        return $this;
-    }
-
     /**
      * @return Collection<int, Reservation>
      */
@@ -154,6 +142,36 @@ class Club
             // set the owning side to null (unless already changed)
             if ($reservation->getClub() === $this) {
                 $reservation->setClub(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Coach>
+     */
+    public function getClub(): Collection
+    {
+        return $this->club;
+    }
+
+    public function addClub(Coach $club): self
+    {
+        if (!$this->club->contains($club)) {
+            $this->club[] = $club;
+            $club->setClub($this);
+        }
+
+        return $this;
+    }
+
+    public function removeClub(Coach $club): self
+    {
+        if ($this->club->removeElement($club)) {
+            // set the owning side to null (unless already changed)
+            if ($club->getClub() === $this) {
+                $club->setClub(null);
             }
         }
 
