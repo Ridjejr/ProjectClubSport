@@ -3,17 +3,19 @@
 namespace App\Controller;
 
 use App\Entity\Club;
+use App\Repository\ClubRepository;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ClubController extends AbstractController
 {
     /**
-     * @Route("/club", name="ficheClub")
+     * @Route("/clubs", name="clubs", methodes={GET})
      */
-    public function ficheClub(Club $club)
+    public function listeClubs(ClubRepository $repo)
     {
-        return $this->render('club/ficheClub.html.twig',[
-          'leClub' => $club  ]);
+        $clubs=$repo->findAll();
+        return $this->render('club/listeClubs.html.twig',[
+          'lesClubs' => $clubs  ]);
     }
 }
