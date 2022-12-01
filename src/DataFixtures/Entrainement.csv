@@ -1,17 +1,61 @@
-1,Alternative Rock
-2,Hard Rock
-3,Pop
-4,Chanson Française
-5,Metal
-6,Rock
-7,Funk
-8,Punk Rock
-9,Thrash Metal
-10,Electronic
-11,Indie
-12,Blues
-13,Celtic
-14,Alternative
-15,Jazz
-16,Swing
-17,Country
+1,Prise de masse,Haltères,Débutant
+2,Prise de masse,Barre parallèle,Intermédiaire
+3,Prise de masse,Poulie,Avancé
+4,Prise de masse,Barre à disques,Intermédiaire
+5,Prise de masse,Banc,Avancé
+6,Prise de masse,Machine de musculation,Expert
+7,Prise de masse,Machine de musculation-Charge guidée,Intermédiaire
+8,Prise de masse,Poid,Débutant
+9,Prise de masse,Sandbag,Avancé
+10,Prise de masse,Leg Curl,Intermédiaire
+11,Prise de masse,Leg Extension,Expert
+12,Prise de masse,Butterfly,Avancé
+13,Prise de masse,Latt Pulldown,Débutant
+14,Prise de masse,Leg Press,Avancé
+15,Prise de masse,Pec Fly,Expert
+16,Prise de masse,Shoulder Press,Débutant
+17,Prise de masse,Presse à mollet,Avancé
+18,Prise de masse,Tricep EXtension,Intermédiaire
+19,Prise de masse,Sandbag,Avancé
+20,Prise de masse,Leg Extension,Avancé
+21,Perte de poid,Rameur,Intermédiaire
+22,Perte de poid,Tapis de course,Débutant
+23,Perte de poid,Homcom Vélo,Avancé
+24,Perte de poid,Escalier roulant,
+25,Perte de poid,Ergomètre,Débutant
+26,Perte de poid,Velo D,Avancé
+27,Perte de poid,Vélo Elliptique,Avancé
+28,Perte de poid,Velo d'appartement,Intermédiaire
+29,Perte de poid,Velo Indoor,Avancé
+30,Perte de poid,Stepper,Avancé
+31,Perte de poid,Press,Expert
+32,Perte de poid,Haltères,Avancé
+33,Perte de poid,Banc,Intermédiaire
+34,Perte de poid,Rameur,Avancé
+35,Perte de poid,Escalier roulant,Expert
+36,Perte de poid,Poulie,Avancé
+37,Perte de poid,Haltères,Expert
+38,Perte de poid,Escalier roulant,Avancé
+39,Perte de poid,Poulie,Intermédiaire
+40,Perte de poid,Rameur,Avancé
+41,Perte de poid,Banc,Débutant
+42,Réeductation,Velo d'appartement,Avancé
+43,Réeductation,Poulie,Expert
+44,Réeductation,Haltères,Débutant
+45,Réeductation,Poulie,Expert
+46,Réeductation,Velo d'appartement,Avancé
+47,Réeductation,Poid,Intermédiaire
+48,Réeductation,Escalier roulant,Expert
+49,Réeductation,Banc,Avancé
+50,Réeductation,Velo d'appartement,Débutant
+51,Réeductation,Poid,Expert
+52,Réeductation,Haltères,Expert
+53,Réeductation,Escalier roulant,Avancé
+54,Réeductation,Haltères,Intermédiaire
+55,Réeductation,Velo d'appartement,Débutant
+56,Réeductation,Haltères,Expert
+57,Réeductation,Escalier roulant,Intermédiaire
+58,Réeductation,Banc,Intermédiaire
+59,Réeductation,Velo d'appartement,Avancé
+60,Réeductation,Banc,Intermédiaire
+61,Réeductation,Velo d'appartement,Débutant
