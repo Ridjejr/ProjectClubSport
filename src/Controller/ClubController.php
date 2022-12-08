@@ -10,12 +10,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class ClubController extends AbstractController
 {
     /**
-     * @Route("/clubs", name="clubs", methodes={GET})
+     * @Route("/clubs", name="clubs", methods={"GET"})
      */
     public function listeClubs(ClubRepository $repo)
     {
         $clubs=$repo->findAll();
         return $this->render('club/listeClubs.html.twig',[
-          'lesClubs' => $clubs  ]);
+          'lesClubs' => $clubs  
+        ]);
     }
 }

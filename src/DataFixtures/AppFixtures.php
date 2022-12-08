@@ -33,7 +33,7 @@ class AppFixtures extends Fixture
                           ->setRue($value[6])
                           ->setCp(intval($value[7]))
                           ->setVille($value[8])
-                          ->setImage('https://randomuser.me/api/portraits/'.$faker->randomElement($genres)."/".mt_rand(1,99)."jpg");
+                          ->setImage('https://randomuser.me/api/portraits/'.$faker->randomElement($genres)."/".mt_rand(1,99).".jpg");
             $manager->persist($adherent);
             $this->addReference("adherent".$adherent->getId(),$adherent);
 
@@ -59,7 +59,7 @@ class AppFixtures extends Fixture
             $coach       ->setId(intval($value[0]))
                          ->setNom($value[1])
                          ->setPrenom($value[2])
-                         ->setImage('https://randomuser.me/api/portraits/'.$faker->randomElement($genres)."/".mt_rand(1,99)."jpg")
+                         ->setImage('https://randomuser.me/api/portraits/'.$faker->randomElement($genres)."/".mt_rand(1,99).".jpg")
                          ->setClub($this->getReference("club".mt_rand(1,60)));
             $manager->persist($coach);
             $this->addReference("coach".$coach->getId(),$coach);
@@ -93,7 +93,7 @@ class AppFixtures extends Fixture
                             ->setCoach($this->getReference("coach".mt_rand(1,30)))
                             ->setClub($this->getReference("club".mt_rand(1,60)));
         $manager->persist($reservation);
-        //$this->addReference("reservation".$reservation->getId(),$reservation);
+        $this->addReference("reservation".$reservation->getId(),$reservation);
 
         }
         $manager->flush();
