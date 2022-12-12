@@ -7,15 +7,10 @@
 <hr>
 <div class="row pt-2">
 {% for leClub in lesClubs %}
-    {% set nbReservations = leClub.reservations|length %}
     <div class="col-sm-12 col-md-12 col-lg-4 col-xl-3">
         <div class="card mb-3">
             <h4 class="card-header"> <a href=" {{path('ficheClub', {'id': leClub.id})}} ">{{leClub.ville}}</a></h4>
-            <div class="card-body">
-                <h5 class="card-title">
-                    <a href="" class="badge badge-success">{{nbReservations}}{% if nbReservations> 1 %} reservations {% else %} reservation{% endif %}</a>
-                </h5>
-            </div>
+            
             <ul class="list-group list-group-flush">
                 	<li class="list-group-item">{{leClub.numrue}}</li>
 					<li class="list-group-item">{{leClub.rue}}</li>
