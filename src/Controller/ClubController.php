@@ -19,4 +19,14 @@ class ClubController extends AbstractController
           'lesClubs' => $clubs  
         ]);
     }
+
+            /**
+     * @Route("/club/{id}", name="ficheClub", methods={"GET"})
+     */
+    public function ficheClub(Club $club)
+    {
+        return $this->render('club/ficheClub.html.twig', [
+            'leClub' => $club
+        ]);
+    }
 }
