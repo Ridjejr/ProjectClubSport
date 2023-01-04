@@ -8,6 +8,7 @@
     </title>
         <link rel="stylesheet" href="https://bootswatch.com/4/cyborg/bootstrap.min.css">
         <link rel="stylesheet" href=" {{asset('css/messtyles.css')}} ">
+        <script src="https://kit.fontawesome.com/cc76ccb927.js" crossorigin="anonymous"></script>
         {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
         {% block stylesheets %}{% endblock %}
     </head>
@@ -32,10 +33,16 @@
                             <a class="dropdown-item" href="#">Cours collectifs</a>
                         </div>
                     </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Gestion des adherents</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href=" {{path('adherents')}} ">Liste des adherents</a>
+                        </div>
+                    </li>
                     
                 </ul>
-                <a class="navbar-nav my-auto" href=" {{path('adherents')}} ">
-                    <li><button type="button" class="btn btn-outline-success" >Espace Adhérent</button></li>
+                <a class="navbar-nav my-auto" href=" {{path('admin_adherents')}} ">
+                    <li><button type="button" class="btn btn-outline-success" >Espace Personnel</button></li>
                 </a>
             </div>
         </nav>

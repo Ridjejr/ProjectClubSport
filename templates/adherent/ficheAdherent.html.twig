@@ -8,10 +8,9 @@
 <div class="row pt-2">
     {% set nbReservations = leAdherent.reservations|length %} 
         <div class="card mb-3">
-            <h4 class="card-header"> {{leAdherent.nom}} </h4>
             <div class="row">
                 <div class="col-3 d-flex align-items-center mx-auto">
-                    <img class="avatar mx-auto d-block" style="height: auto; width: 200px;  display: block;" src=" {{leAdherent.image}} " alt="Card image">
+                    <img class="avatar mx-auto d-block" class="dropdown-divider" style="height: auto; width: 200px;  display: block;" src=" {{leAdherent.image}} " alt="Card image">
                 </div>    
                 <div class="col">
                     <div class="card-body">
@@ -19,10 +18,16 @@
                             <a href="" class="badge badge-success">{{nbReservations}}{% if nbReservations> 1 %} reservations {% else %} reservation{% endif %}</a>
                         </h5>
                     </div>
-                    
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item"> {{ leAdherent.email}} </li>
-                    </ul>             
+                        <div class="card-body">
+                        <p class="card-header">Nom : {{leAdherent.nom}} </p>
+                        
+                        <p class="card-text">Prenom : {{leAdherent.prenom}} </p>
+                        <p class="card-text">Téléphone : {{ leAdherent.telephone}}</p>
+                        <p class="card-text">Adresse : {{ leAdherent.AdresseComplete}}</p>
+                        <p class="card-text">Code postale : {{ leAdherent.CP}}</p>
+                        <p class="card-text">Ville : {{ leAdherent.ville}}</p>
+
+                    </div>            
                 </div>
             </div>
 

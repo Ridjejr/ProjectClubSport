@@ -14,7 +14,7 @@ class Adherent
 {
     /**
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      * @ORM\Column(type="integer")
      */
     private $id;
@@ -274,5 +274,10 @@ class Adherent
         }
 
         return $this;
+    }
+
+    public function getAdresseComplete(): ?string
+    {
+        return $this->NumRue ." ". $this->Rue;
     }
 }

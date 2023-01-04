@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gestion adherents{% endblock %}
+
+{% block body %}
+
+<h1 class="pt-2 text-center">Inscription d'un adherent</h1>
+{{form_start(formAdherent)}}
+
+{{form_row(formAdherent.nom)}}
+{{form_row(formAdherent.prenom)}}
+
+<div class="row">
+    <div class="col">{{form_row(formAdherent.telephone)}}</div>
+    <div class="col">{{form_row(formAdherent.dateNaiss)}}</div>
+</div>
+
+{{form_row(formAdherent.email)}}
+
+<div class="row">
+    <div class="col">{{form_row(formAdherent.NumRue)}}</div>
+    <div class="col">{{form_row(formAdherent.Rue)}}</div>
+</div>
+<div class="row">
+    <div class="col">{{form_row(formAdherent.CP)}}</div>
+    <div class="col">{{form_row(formAdherent.ville)}}</div>
+</div>
+
+{{form_row(formAdherent.image)}}
+<div class="row">
+    <div class="col"><a href=" {{path('admin_adherents')}} " class="btn btn-warning btn-block">Annuler</a></div>
+    <div class="col"><input type="submit", class="btn btn-success btn-block" value="valider"></div>
+</div>
+
+
+
+
+{{form_end(formAdherent)}}
+{% endblock %}
