@@ -30,20 +30,50 @@ class AdherentController extends AbstractController
 
     /**
      * @Route("/admin/adherent/ajout", name="admin_adherent_ajout", methods={"GET","POST"})
+     * @Route("/admin/adherent/modif/{id}", name="admin_adherent_modif", methods={"GET","POST"})
      */
-    public function ajoutAdherent(Request $request, EntityManagerInterface $manager)
+    public function ajoutModifAdherent(Adherent $adherent=null, Request $request, EntityManagerInterface $manager)
     {
-        $adherent= new Adherent();
+        if($adherent == null){
+            $adherent = new Adherent();
+            $mode="ajouté";
+        }else {
+            $mode="modifié";
+        }
         $form=$this->createForm(AdherentType::class, $adherent);
         $form->handleRequest($request);
+        
         if($form->isSubmitted() && $form->isValid())
         {
             $manager->persist($adherent);
             $manager->flush();
+            $this->addFlash(
+               'success', "L'adherent a été bien $mode"
+            );
             return $this->redirectToRoute('admin_adherents');
         }
-        return $this->render('admin/adherent/formAjoutAdherent.html.twig', [
+        return $this->render('admin/adherent/formAjoutModifAdherent.html.twig', [
             'formAdherent' => $form->createView()
         ]);
     }
+
+    /**
+     * @Route("/admin/adherent/suppression/{id}", name="admin_adherent_suppression", methods={"GET"})
+     */
+    public function suppressionAdherent(Adherent $adherent, EntityManagerInterface $manager)
+    {
+        $nbReservations=$adherent->getReservations()->count();
+        if($nbReservations>0){
+            $this->addFlash("danger", "Vous ne pouvez pas supprimer cet adherent car $nbReservations reservation(s) y sont associés ");
+        }else{
+        $manager->remove($adherent);
+        $manager->flush();
+        $this->addFlash(
+            'success', "L'adherent a été bien été supprimé");
+        }
+        return $this->redirectToRoute('admin_adherents');
+
+    }
+
+
 }

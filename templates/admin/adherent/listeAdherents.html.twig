@@ -6,18 +6,19 @@
 <h3 class="pt-2 text-center">Gestion des Adherents</h3>
 <a href=" {{path('admin_adherent_ajout')}} " class="btn btn-info">Inscrire un adherent</a>
 <hr>
+  <table class="table table-hover">
   <thead>
     <tr>
       <th scope="col-1"></th>
       <th scope="col-2">Nom</th>
-      <th scope="col-7">Detail</th>
+      <th scope="col-7">Detail</th> 
       <th scope="col-2">Actions</th>
     </tr>
   </thead>
   <tbody>
         {% for leAdherent in lesAdherents %}
             {% set nbReservations = leAdherent.reservations|length %}
-            <table class="table table-hover">    
+    
             <tr>
               <td class="col-1"><img class="avatar mx-auto d-block" style="height: auto; width: 50px;  display: block;" src=" {{leAdherent.image}} " alt="Card image"></td>
               <td class="col-2">{{leAdherent.nom}}</td>
@@ -30,14 +31,14 @@
             <p> {{leAdherent.Telephone|slice(0,100)|raw}} </p>
             </td>
             <td class="col-2">
-                <a href="" class="btn btn-primary"><i class="fas fa-pen"></i></a>
+                <a href=" {{path('admin_adherent_modif', {'id': leAdherent.id})}} " class="btn btn-primary"><i class="fas fa-pen"></i></a>
                 <a class="btn btn-danger"
                 data-toggle="modal"
                 data-target="#modalSimple"
-                {# data-titre="Suppression d'un artiste"
-                data-message="Etes vous sur de vouloir supprimer l'artiste : {{ leAdherent.nom }}"
-                data-libelleBouton="Supprimer l'artiste"
-                data-lien="{{ path('admin_artiste_suppression', {'id': leAdherent.id}) }}" #}
+                data-titre="Suppression d'un adherent"
+                data-message="Etes vous sur de vouloir supprimer l'adherent : {{ leAdherent.nom }}"
+                data-libelleBouton="Supprimer l'adherent"
+                data-lien="{{ path('admin_adherent_suppression', {'id': leAdherent.id}) }}"
                 ><i class="fa-solid fa-box-archive"></i></a>
             </td>
             </td>
@@ -47,4 +48,7 @@
 </table>
 
 </div>
+{% endblock %}
+{% block javascripts %}
+{% include "include/_modale.html.twig" %}
 {% endblock %}

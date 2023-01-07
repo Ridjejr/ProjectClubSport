@@ -4,7 +4,14 @@
 
 {% block body %}
 
-<h1 class="pt-2 text-center">Inscription d'un adherent</h1>
+<h3 class="pt-2 text-center">
+{% if (app.request.attributes.get('_route')=="admin_adherent_ajout") %}
+    Inscription
+{% else %}
+    Modification
+{% endif %}
+d'un adherent</h3>
+
 {{form_start(formAdherent)}}
 
 {{form_row(formAdherent.nom)}}
@@ -29,7 +36,12 @@
 {{form_row(formAdherent.image)}}
 <div class="row">
     <div class="col"><a href=" {{path('admin_adherents')}} " class="btn btn-warning btn-block">Annuler</a></div>
-    <div class="col"><input type="submit", class="btn btn-success btn-block" value="valider"></div>
+    <div class="col"><input type="submit", class="btn btn-success btn-block" value=
+    {% if (app.request.attributes.get('_route')=="admin_adherent_ajout") %}
+    "Inscrire"
+    {% else %}
+    "Modifier"
+{% endif %}"l'adherent"></div>
 </div>
 
 
