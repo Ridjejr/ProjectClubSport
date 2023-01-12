@@ -5,3 +5,13 @@
 .avatar{
     border-radius: 50%;
 }
+
+.miniature{
+    max-width: 80px;
+    height: auto;
+}
+
+.supermini{
+    max-width: 40px;
+    height: auto;
+}

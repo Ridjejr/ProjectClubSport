@@ -21,6 +21,7 @@ class Adherent
 
     /**
      * @ORM\Column(type="string", length=255)
+     * Assert\NotBlanck(message="Le nom est obligatoire")
      */
     private $nom;
 
@@ -278,6 +279,6 @@ class Adherent
 
     public function getAdresseComplete(): ?string
     {
-        return $this->NumRue ." ". $this->Rue;
+        return $this->NumRue ." ". "rue" ." ". $this->Rue;
     }
 }

@@ -8,24 +8,25 @@
 <div class="row pt-2">
 {% for leAdherent in lesAdherents %}
     {% set nbReservations = leAdherent.reservations|length %}
-    <div class="col-sm-12 col-md-12 col-lg-4 col-xl-3">
-        <div class="card mb-3">
-            <h4 class="card-header"> <a href=" {{path('ficheAdherent', {'id': leAdherent.id})}} ">{{leAdherent.nom}}</a></h4>
-            <div class="card-body">
-                <h5 class="card-title">
-                    <a href="" class="badge badge-success">{{nbReservations}}{% if nbReservations> 1 %} reservations {% else %} reservation{% endif %}</a>
-                </h5>
+        <div class="col-sm-12 col-md-12 col-lg-4 col-xl-3">
+            <div class="card mb-3">
+                <h4 class="card-header"> <a href=" {{path('ficheAdherent', {'id': leAdherent.id})}} ">{{leAdherent.nom}}</a></h4>
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <a href="" class="badge badge-success">{{nbReservations}}{% if nbReservations> 1 %} reservations {% else %} reservation{% endif %}</a>
+                    </h5>
+                </div>
+                <img class="avatar mx-auto d-block" style="height: auto; width: 200px;  display: block;" src=" {{leAdherent.image}} " alt="Card image">
+                <div class="card-body">
+                    <p class="card-text"> {{leAdherent.Telephone|slice(0,200)|raw}}... </p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"> {{ leAdherent.email}} </li>
+                </ul>
             </div>
-            <img class="avatar mx-auto d-block" style="height: auto; width: 200px;  display: block;" src=" {{leAdherent.image}} " alt="Card image">
-            <div class="card-body">
-                <p class="card-text"> {{leAdherent.Telephone|slice(0,200)|raw}}... </p>
-            </div>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item"> {{ leAdherent.email}} </li>
-            </ul>
-
         </div>
-    </div>
+
+
 {% endfor %}
 
 </div>

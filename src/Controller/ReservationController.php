@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Reservation;
+use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\ReservationRepository;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -10,23 +11,24 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class ReservationController extends AbstractController
 {
     /**
-     * @Route("/reservations", name="reservations", methods={"GET"})
+     * @Route("/adherents", name="reservations", methods={"GET"})
      */
     public function listeReservations(ReservationRepository $repo)
     {
         $reservation=$repo->findAll();
-        return $this->render('reservation/listeReservations.html.twig', [
+        return $this->render('adherent/listeReservations.html.twig', [
             'lesReservations' => $reservation
         ]);
     }
 
-        /**
-     * @Route("/reservation/{id}", name="ficheReservation", methods={"GET"})
-     */
-    public function ficheReservation(Reservation $reservation)
-    {
-        return $this->render('reservation/ficheReservation.html.twig', [
-            'laReservation' => $reservation
-        ]);
-    }
+    //     /**
+    //  * @Route("/adherent/{id}", name="ficheAdherent", methods={"GET"})
+    //  */
+    // public function ficheAdherent(Adherent $adherent)
+    // {
+        
+    //     return $this->render('adherent/ficheAdherent.html.twig', [
+    //         'leAdherent' => $adherent
+    //     ]);
+    // }
 }

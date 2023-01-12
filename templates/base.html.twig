@@ -14,7 +14,7 @@
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <i id="titre" class="navbar-brand" href=" {{path('accueil')}} ">MAGIC PARK</i>
+            <i><a id="titre" class="navbar-brand" href=" {{path('accueil')}} ">MAGIC PARK</a></i>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -22,28 +22,68 @@
             <div class="collapse navbar-collapse" id="navbarColor02">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="{{path('clubs')}} ">Clubs</a>
+                            <a class="nav-link" href="{{path('clubs')}} ">CLUBS</a>
                         </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Nos entrainements</a>
+                    <li class="nav-item ">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">ENTRAINEMENTS</a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">Musculation</a>
-                            <a class="dropdown-item" href="#">Cardio Training</a>
-                            <a class="dropdown-item" href="#">Cross Training</a>
-                            <a class="dropdown-item" href="#">Cours collectifs</a>
+                            <a class="dropdown-item" href="#">Débutant</a>
+                            <a class="dropdown-item" href="#">Intermédiare</a>
+                            <a class="dropdown-item" href="#">Professionel</a>
+                            <a class="dropdown-item" href="#">Expert</a>
                         </div>
                     </li>
+                    {% if app.user and is_granted('ROLE_ADMIN') %}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Gestion des adherents</a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href=" {{path('adherents')}} ">Liste des adherents</a>
+                            </div>
+                        </li>
+                        {% endif %}
+                        {% if app.user and is_granted('ROLE_ADMIN') %}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Administration</a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href=" {{path('admin_adherents')}} ">Gestion des adherents</a>
+                                <a class="dropdown-item" href=" {{path('admin_reservations')}} ">Gestion des reservations</a>
+                            </div>
+                        </li>
+                    {% endif %}
+                    
+                </ul>
+                <ul class="navbar-nav my-auto">
+                {% if app.user %}
+                    <li class="nav-item">
+                        <img class="avatar supermini" src=" {{app.user.avatar}} " alt="photo de {{app.user.fullName}}">
+                    </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Gestion des adherents</a>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href=" {{path('adherents')}} ">Liste des adherents</a>
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"{{app.user.fullName}}</a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item" href="#">Mon profil</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href=" {{path('app_logout')}} ">Déconnexion</a>
                         </div>
                     </li>
                     
+                {% else %}
+                    {# <li class="nav-item">
+                        <a href=" {{path('app_login')}} " class="nav-link class="btn btn-outline-success">Connexion</a>
+                    </li> #}
+                    <a class="nav-item my-auto" href=" {{path('app_login')}} ">
+                        <li class="mr-2"><button type="button" class="btn btn-outline-success" >Connexion</button></li>
+                    </a>
+
+                    <a class="nav-item my-auto" href=" {{path('app_register')}}} ">
+                        <li><button type="button" class="btn btn-outline-success" >Inscription</button></li>
+                    </a>
+                    {# <li class="nav-item">
+                        <a href=" {{path('app_register')}} " class="nav-link">Inscription</a>
+                    </li> #}
+                {% endif %}
+
                 </ul>
-                <a class="navbar-nav my-auto" href=" {{path('admin_adherents')}} ">
-                    <li><button type="button" class="btn btn-outline-success" >Espace Personnel</button></li>
-                </a>
+
             </div>
         </nav>
         <div class="container pt-3">

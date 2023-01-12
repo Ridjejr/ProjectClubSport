@@ -25,6 +25,7 @@ class AdherentController extends AbstractController
      */
     public function ficheAdherent(Adherent $adherent)
     {
+        
         return $this->render('adherent/ficheAdherent.html.twig', [
             'leAdherent' => $adherent
         ]);

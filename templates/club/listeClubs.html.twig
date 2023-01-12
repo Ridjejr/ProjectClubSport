@@ -3,25 +3,25 @@
 {% block title %}Clubs de Magic Park{% endblock %}
 
 {% block body %}
-<h1 class="pt-2 text-center">Club Magic Park</h1>
+<h3 class="pt-2 text-center">TROUVER UN CLUB</h3>
 <hr>
-<div class="row pt-2">
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col-1">Adresse</th>
+            <th scope="col-2">Code Postale</th>
+            <th scope="col-7">Ville</th>
+        </tr>
+    </thead>
+    <tbody>
 {% for leClub in lesClubs %}
-    <div class="col-sm-12 col-md-12 col-lg-4 col-xl-3">
-        <div class="card mb-3">
-            <h4 class="card-header"> <a href=" {{path('ficheClub', {'id': leClub.id})}} ">{{leClub.ville}}</a></h4>
-            
-            <ul class="list-group list-group-flush">
-                	<li class="list-group-item">{{leClub.numrue}}</li>
-					<li class="list-group-item">{{leClub.rue}}</li>
-					<li class="list-group-item">{{leClub.cp}}</li>
-				
-            </ul>
-
-        </div>
-    </div>
+        <tr>
+            <th scope="col-1">{{ leClub.numRue}} rue {{ leClub.rue}}</th>
+            <th scope="col-2">{{ leClub.CP}}</th>
+            <th scope="col-7">{{ leClub.ville}}</th>
+        </tr>
 {% endfor %}
-
-</div>
+  </tbody>
+</table>
 {% endblock %}
 

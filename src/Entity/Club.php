@@ -178,4 +178,9 @@ class Club
         return $this;
     }
 
+    public function getAdressComplete(): ?string
+    {
+        return $this->NumRue ." ". "rue" ." ". $this->Rue;
+    }
+
 }
