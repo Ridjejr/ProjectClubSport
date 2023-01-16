@@ -3,7 +3,7 @@
 }
 
 .avatar{
-    border-radius: 50%;
+    border-top-width: 0;
 }
 
 .miniature{
@@ -15,3 +15,59 @@
     max-width: 40px;
     height: auto;
 }
+
+/* .Header::before { */
+
+    /* content: " ";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+    background: url(https://magic-form.fr/build/images/breadcrumb/abonnement-desktop.jpg) center center / cover;
+    opacity: 2;
+    transform: scale(1.03);
+   } */
+
+   /* .div3Sec1 {
+
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    margin-bottom: 16px; 
+   }
+  
+   .Point {
+     padding: 8px;
+   }
+
+   .Section1 {
+
+    box-sizing: border-box;
+    padding: 0px 16px;
+    width: 100%;
+    max-width: 1300px;
+    margin: auto;
+    position: relative;
+    z-index: 2;
+   } */
+  
+   /* .div1Sec1 {
+  
+    height: 230px;
+    margin: auto;
+    position: relative;
+    bottom: 20px;
+    display: flex;
+    align-items: flex-end;
+    z-index: 10;
+   }
+  
+   .div2Sec1 {
+  
+    display: flex;
+    flex-direction: column;
+    padding: 8px;
+   } */
+  
+   

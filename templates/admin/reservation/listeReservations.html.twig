@@ -18,8 +18,8 @@
     <tbody>
     {% for laReservation in leAdherent.reservations %}
             <tr>
-                <td>{{leAdherent.id.nom}}</td>
-                <td>{{laReservation.DateR|date("m/d/Y")}}</td>
+                <td>{{leAdherent.nom}}</td>
+                <td>{{laReservation.DateR|date("d/m/Y")}}</td>
                 <td>{{laReservation.HeureR|date("H:i:s")}}</td>
                 <td>{{laReservation.coach.nom}}</td>
             </tr>   

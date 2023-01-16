@@ -21,6 +21,7 @@
                     </div>    
                     <div class="card-body">
                         <p class="card-header">Prénom : {{leAdherent.prenom}} </p>
+                        <p class="card-header">Date de naissance : {{leAdherent.DateNaiss|date("d/m/Y")}} </p>
                         <p class="card-header">Courriel : {{leAdherent.email|raw}} </p>
                         <p class="card-header">Téléphone : {{ leAdherent.telephone}}</p>
                         <p class="card-header">Adresse : {{ leAdherent.AdresseComplete}}</p>

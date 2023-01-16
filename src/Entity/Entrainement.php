@@ -39,9 +39,21 @@ class Entrainement
      */
     private $Adherent;
 
+    /**
+     * @ORM\Column(type="datetime_immutable", nullable=true)
+     */
+    private $updatedAt;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $image;
+
     public function __construct()
     {
         $this->Adherent = new ArrayCollection();
+        $this->setUpdatedAt(new \DateTimeImutable);
+        $this->setImage("SalledeSport.webp");
     }
 
     public function getId(): ?int
@@ -112,6 +124,30 @@ class Entrainement
     public function removeAdherent(Adherent $adherent): self
     {
         $this->Adherent->removeElement($adherent);
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeImmutable
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(\DateTimeImmutable $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(string $image): self
+    {
+        $this->image = $image;
 
         return $this;
     }
