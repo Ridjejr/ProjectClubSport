@@ -5,6 +5,10 @@
 {% block body %}
 <h3 class="pt-2 text-center">Gestion des Adherents</h3>
 <a href=" {{path('admin_adherent_ajout')}} " class="btn btn-info">Inscrire un adherent</a>
+{{ form_start(formFiltreAdherent) }}
+  {{ form_row(formFiltreAdherent.nom) }}
+  {{ form_row(formFiltreAdherent.rechercher) }}
+{{ form_end(formFiltreAdherent) }}
 <hr>
   <table class="table table-hover">
   <thead>
@@ -17,8 +21,7 @@
   </thead>
   <tbody>
         {% for leAdherent in lesAdherents %}
-            {% set nbReservations = leAdherent.reservations|length %}
-    
+            {% set nbReservations = leAdherent.reservations|length %}  
             <tr>
               <td class="col-1"><img class="avatar mx-auto d-block" style="height: auto; width: 50px;  display: block;" src=" {{leAdherent.image}} " alt="Card image"></td>
               <td class="col-2">{{leAdherent.nom}}</td>

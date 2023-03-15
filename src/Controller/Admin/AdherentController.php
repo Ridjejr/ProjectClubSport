@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\Adherent;
 use App\Form\AdherentType;
+use App\Form\FiltreAdherentType;
 use App\Repository\AdherentRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
@@ -18,13 +19,17 @@ class AdherentController extends AbstractController
      */
     public function listeAdherents(AdherentRepository $repo,  PaginatorInterface $paginator, Request $request)
     {
-        // $adherent = $paginator->paginate(
-        //     $request->query->getInt('page', 1), /*page number*/
-        //     9 /*limit per page*/
-        // );
+        $formFiltreAdherent=$this->createForm(FiltreAdherentType::class);
+        $formFiltreAdherent->handleRequest($request);
+        if ($formFiltreAdherent->isSubmitted() && $formFiltreAdherent->isValid()) { 
+            // on recupère la saisie dans le formulaire du nom 
+            $nom = $formFiltreAdherent->get('nom') ->getData();
+        }      
+
         $adherent=$repo->findAll();
         return $this->render('admin/adherent/listeAdherents.html.twig', [
-            'lesAdherents' => $adherent
+            'lesAdherents' => $adherent,
+            'formFiltreAdherent'=>$formFiltreAdherent->createView()
         ]);
     }
 

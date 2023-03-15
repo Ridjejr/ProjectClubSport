@@ -52,7 +52,7 @@ class Entrainement
     public function __construct()
     {
         $this->Adherent = new ArrayCollection();
-        $this->setUpdatedAt(new \DateTimeImutable);
+        $this->setUpdatedAt(new \DateTimeImmutable);
         $this->setImage("SalledeSport.webp");
     }
 

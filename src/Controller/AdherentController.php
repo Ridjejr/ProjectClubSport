@@ -3,9 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Adherent;
+use App\Form\FiltreAdherentType;
 use App\Repository\AdherentRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class AdherentController extends AbstractController
 {
@@ -16,7 +17,7 @@ class AdherentController extends AbstractController
     {
         $adherent=$repo->findAll();
         return $this->render('adherent/listeAdherents.html.twig', [
-            'lesAdherents' => $adherent
+            'lesAdherents' => $adherent,
         ]);
     }
 

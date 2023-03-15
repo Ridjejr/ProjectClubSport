@@ -1,37 +1,46 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Reservation Magic Park{% endblock %}
+{% block title %}Gestion reservations{% endblock %}
 
 {% block body %}
-<h3 class="pt-2 text-center">Gestion des Reservation</h3>
-<a href=" {{path('admin_reservation_ajout')}} " class="btn btn-info">Ajouter une réservation</a>
+<h3 class="pt-2 text-center">Gestion des Reservations</h3>
+<a href=" {{path('admin_reservation_ajout')}} " class="btn btn-info">Ajouter une reservation</a>
 <hr>
-<table class="table table-hover mx-auto">
-    <thead>
-        <tr>
-            <th scope="col-3">Nom</th>
-            <th scope="col-3">Date</th>
-            <th scope="col-1">Heure</th>
-            <th scope="col-1">Coach</th>
-        </tr>
-    </thead>
-    <tbody>
-    {% for laReservation in leAdherent.reservations %}
+  <table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col-1"></th>
+      <th scope="col-2">Nom</th>
+      <th scope="col-7">Detail</th> 
+      <th scope="col-2">Actions</th>
+      <th scope="col-2">Actions</th>
+      <th scope="col-2">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+        {% for leReservation in lesReservations %}
+            {% set nbEntrainements = leReservation.entrainements|length %}
+    
             <tr>
-                <td>{{leAdherent.nom}}</td>
-                <td>{{laReservation.DateR|date("d/m/Y")}}</td>
-                <td>{{laReservation.HeureR|date("H:i:s")}}</td>
-                <td>{{laReservation.coach.nom}}</td>
-            </tr>   
+              <td class="col-1"><img class="avatar mx-auto d-block" style="height: auto; width: 50px;  display: block;" src=" {{leReservation.image}} " alt="Card image"></td>
+              <td class="col-2">{{leReservation.nom}}</td>
+              <td class="col-7">
+
+            <p class="d-flex flex-row">
+                <span class="align-self-center badge badge-success"> {{nbEntrainements}} {% if nbEntrainements> 1 %} entrainements {% else %} entrainement{% endif %}</span>
+                <span class="align-self-center ml-auto"> {{ leReservation.email}} </span>
+            </p>
+            <p> {{leReservation.Telephone|slice(0,100)|raw}} </p>
+            </td>
             <td class="col-2">
-                <a href=" {{path('admin_reservation_modif', {'id': laReservation.id})}} " class="btn btn-primary"><i class="fas fa-pen"></i></a>
+                <a href=" {{path('admin_reservation_modif', {'id': leReservation.id})}} " class="btn btn-primary"><i class="fas fa-pen"></i></a>
                 <a class="btn btn-danger"
                 data-toggle="modal"
                 data-target="#modalSimple"
-                data-titre="Suppression d'une reservation"
-                data-message="Etes vous sur de vouloir supprimer la reservation : {{ leAdherent.id.nom }}"
-                data-libelleBouton="Supprimer la reservation"
-                data-lien="{{ path('admin_reservation_suppression', {'id': laReservation.id}) }}"
+                data-titre="Suppression d'un reservation"
+                data-message="Etes vous sur de vouloir supprimer l'reservation : {{ leReservation.nom }}"
+                data-libelleBouton="Supprimer l'reservation"
+                data-lien="{{ path('admin_reservation_suppression', {'id': leReservation.id}) }}"
                 ><i class="fa-solid fa-box-archive"></i></a>
             </td>
             </td>
