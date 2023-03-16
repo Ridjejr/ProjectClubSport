@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gestion adherents{% endblock %}
+
+{% block body %}
+
+<h3 class="pt-2 text-center">
+{% if (app.request.attributes.get('_route')=="admin_reservation_ajout") %}
+    Reservation
+{% else %}
+    Modification
+{% endif %}
+d'un adherent</h3>
+
+{{form_start(formReservation)}}
+
+{{form_row(formReservation.adherent)}}
+
+<div class="row">
+    <div class="col">{{form_row(formReservation.dateR)}}</div>
+    <div class="col">{{form_row(formReservation.HeureR)}}</div>
+</div>
+
+{{form_row(formReservation.club)}}
+{{form_row(formReservation.coach)}}
+
+<div class="row">
+    <div class="col"><a href=" {{path('admin_reservations')}} " class="btn btn-warning btn-block">Annuler</a></div>
+    <div class="col"><input type="submit", class="btn btn-success btn-block" value=
+    {% if (app.request.attributes.get('_route')=="admin_reservation_ajout") %}
+    "Reserver"
+    {% else %}
+    "Modifier"
+{% endif %}"la reservation"></div>
+</div>
+
+
+{{form_end(formReservation)}}
+{% endblock %}

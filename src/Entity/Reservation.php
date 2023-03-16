@@ -2,8 +2,9 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\ReservationRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass=ReservationRepository::class)
@@ -29,25 +30,29 @@ class Reservation
 
 
     /**
-     * @ORM\OneToMany(targetEntity=Coach::class, mappedBy="Reservation")
-     */
-    private $coaches;
-
-    /**
      * @ORM\ManyToOne(targetEntity=Adherent::class, inversedBy="reservations")
      * @ORM\JoinColumn(nullable=false)
+     * Assert\Count(
+     * min = "1", 
+     * minMessage = "Vous devez selectionner un club")
      */
     private $adherent;
 
     /**
      * @ORM\ManyToOne(targetEntity=Coach::class, inversedBy="reservations")
      * @ORM\JoinColumn(nullable=false)
+     * Assert\Count(
+     * min = "1", 
+     * minMessage = "Vous devez selectionner un club")
      */
     private $coach;
 
     /**
      * @ORM\ManyToOne(targetEntity=Club::class, inversedBy="reservation")
      * @ORM\JoinColumn(nullable=false)
+     * Assert\Count(
+     * min = "1", 
+     * minMessage = "Vous devez selectionner un club")
      */
     private $club;
 

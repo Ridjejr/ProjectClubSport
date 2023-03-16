@@ -9,36 +9,29 @@
   <table class="table table-hover">
   <thead>
     <tr>
-      <th scope="col-1"></th>
-      <th scope="col-2">Nom</th>
-      <th scope="col-7">Detail</th> 
-      <th scope="col-2">Actions</th>
-      <th scope="col-2">Actions</th>
-      <th scope="col-2">Actions</th>
+      <th scope="col-1">Adherent</th>
+      <th scope="col-2">Date</th>
+      <th scope="col-2">Club</th> 
+      <th scope="col-2">Coach</th>
+      <th scope="col-1">Heure</th>
+      <th scope="col-">Actions</th>
     </tr>
   </thead>
   <tbody>
         {% for leReservation in lesReservations %}
-            {% set nbEntrainements = leReservation.entrainements|length %}
-    
             <tr>
-              <td class="col-1"><img class="avatar mx-auto d-block" style="height: auto; width: 50px;  display: block;" src=" {{leReservation.image}} " alt="Card image"></td>
-              <td class="col-2">{{leReservation.nom}}</td>
-              <td class="col-7">
-
-            <p class="d-flex flex-row">
-                <span class="align-self-center badge badge-success"> {{nbEntrainements}} {% if nbEntrainements> 1 %} entrainements {% else %} entrainement{% endif %}</span>
-                <span class="align-self-center ml-auto"> {{ leReservation.email}} </span>
-            </p>
-            <p> {{leReservation.Telephone|slice(0,100)|raw}} </p>
-            </td>
+              <td class="col-1">{{leReservation.adherent.nom}}</td>
+              <td class="col-2">{{leReservation.DateR|date("d/m/Y")}}</td>
+              <td class="col-2">{{leReservation.club.ville}}</td>
+              <td class="col-2">{{leReservation.coach.nom}}</td>
+              <td class="col-1">{{leReservation.HeureR|date("H:i")}}</td>
             <td class="col-2">
                 <a href=" {{path('admin_reservation_modif', {'id': leReservation.id})}} " class="btn btn-primary"><i class="fas fa-pen"></i></a>
                 <a class="btn btn-danger"
                 data-toggle="modal"
                 data-target="#modalSimple"
                 data-titre="Suppression d'un reservation"
-                data-message="Etes vous sur de vouloir supprimer l'reservation : {{ leReservation.nom }}"
+                data-message="Etes vous sur de vouloir supprimer la reservation : {{ leReservation.adherent.nom }}"
                 data-libelleBouton="Supprimer l'reservation"
                 data-lien="{{ path('admin_reservation_suppression', {'id': leReservation.id}) }}"
                 ><i class="fa-solid fa-box-archive"></i></a>

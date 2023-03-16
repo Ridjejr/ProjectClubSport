@@ -143,4 +143,9 @@ class Coach
 
         return $this;
     }
+
+    public function getCoatchAvecClub(): ?String
+    {
+        return $this->getNom() . " " . $this->getPrenom() . "(". $this->getClub()->getVille(). ")";
+    }
 }
