@@ -48,7 +48,7 @@ class Reservation
     private $coach;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Club::class, inversedBy="reservation")
+     * @ORM\ManyToOne(targetEntity=Club::class, inversedBy="reservation", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      * Assert\Count(
      * min = "1", 

@@ -67,6 +67,5 @@ class CoachController extends AbstractController
             'success', "Le coach a été bien été supprimé");
         }
         return $this->redirectToRoute('admin_coachs');
-
     }
 }

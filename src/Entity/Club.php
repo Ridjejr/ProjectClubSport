@@ -42,7 +42,7 @@ class Club
 
 
     /**
-     * @ORM\OneToMany(targetEntity=Reservation::class, mappedBy="club")
+     * @ORM\OneToMany(targetEntity=Reservation::class, mappedBy="club", cascade={"persist"})
      */
     private $reservation;
 

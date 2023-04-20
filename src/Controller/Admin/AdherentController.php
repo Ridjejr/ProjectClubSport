@@ -17,19 +17,11 @@ class AdherentController extends AbstractController
     /**
      * @Route("/admin/adherents", name="admin_adherents", methods={"GET"})
      */
-    public function listeAdherents(AdherentRepository $repo,  PaginatorInterface $paginator, Request $request)
-    {
-        $formFiltreAdherent=$this->createForm(FiltreAdherentType::class);
-        $formFiltreAdherent->handleRequest($request);
-        if ($formFiltreAdherent->isSubmitted() && $formFiltreAdherent->isValid()) { 
-            // on recupère la saisie dans le formulaire du nom 
-            $nom = $formFiltreAdherent->get('nom') ->getData();
-        }      
-
+    public function listeAdherents(AdherentRepository $repo,  PaginatorInterface $paginator)
+    {     
         $adherent=$repo->findAll();
         return $this->render('admin/adherent/listeAdherents.html.twig', [
-            'lesAdherents' => $adherent,
-            'formFiltreAdherent'=>$formFiltreAdherent->createView()
+            'lesAdherents' => $adherent
         ]);
     }
 

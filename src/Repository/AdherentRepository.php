@@ -3,8 +3,9 @@
 namespace App\Repository;
 
 use App\Entity\Adherent;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @extends ServiceEntityRepository<Adherent>
@@ -39,20 +40,15 @@ class AdherentRepository extends ServiceEntityRepository
         }
     }
 
-//    /**
-//     * @return Adherent[] Returns an array of Adherent objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('a')
-//            ->andWhere('a.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('a.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+   /**
+    * @return QueryBuilder Returns an array of Adherent objects
+    */
+   public function listeAdherentsSimple(): QueryBuilder
+   {
+       return $this->createQueryBuilder('a')
+           ->orderBy('a.nom', 'ASC')
+       ;
+   }
 
 //    public function findOneBySomeField($value): ?Adherent
 //    {

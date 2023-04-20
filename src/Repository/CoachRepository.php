@@ -3,8 +3,9 @@
 namespace App\Repository;
 
 use App\Entity\Coach;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @extends ServiceEntityRepository<Coach>
@@ -39,20 +40,15 @@ class CoachRepository extends ServiceEntityRepository
         }
     }
 
-//    /**
-//     * @return Coach[] Returns an array of Coach objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('c')
-//            ->andWhere('c.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('c.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+   /**
+    * @return QueryBuilder Returns an array of Coach objects
+    */
+    public function listeCoachsSimple(): QueryBuilder
+    {
+        return $this->createQueryBuilder('coa')
+            ->orderBy('coa.nom', 'ASC')
+        ;
+    }
 
 //    public function findOneBySomeField($value): ?Coach
 //    {

@@ -5,6 +5,15 @@
 {% block body %}
 <h3 class="pt-2 text-center">Gestion des Reservations</h3>
 <a href=" {{path('admin_reservation_ajout')}} " class="btn btn-info">Ajouter une reservation</a>
+{{ form_start(formFiltreReservation) }}
+<div class="row">
+  <div class="col">{{ form_row(formFiltreReservation.nom) }}</div>
+  <div class="col">{{ form_row(formFiltreReservation.club) }}</div>
+  <div class="col">{{ form_row(formFiltreReservation.coachs) }}</div>
+</div>
+
+  <button type="submit" class ="btn btn-warning">Rechercher</button>
+{{ form_end(formFiltreReservation) }}
 <hr>
   <table class="table table-hover">
   <thead>
@@ -14,7 +23,7 @@
       <th scope="col-2">Club</th> 
       <th scope="col-2">Coach</th>
       <th scope="col-1">Heure</th>
-      <th scope="col-">Actions</th>
+      <th scope="col-2">Actions</th>
     </tr>
   </thead>
   <tbody>

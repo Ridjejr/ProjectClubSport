@@ -35,7 +35,8 @@ class CoachType extends AbstractType
                 'choice_label' => 'ville',
                 'attr' =>[
                     "placeholder" => "Saisir la ville du club"
-                ]
+                ],
+                'required' =>false,
             ])
         ;
     }

@@ -38,7 +38,8 @@ class ReservationType extends AbstractType
                 'choice_label' => 'nom',
                 'attr' =>[
                     "placeholder" => "Saisir le nom de l'adherent"
-                ]
+                ],
+                'required' =>false,
             ])
 
             // ->add('adherent',TextType::class,[
@@ -54,7 +55,8 @@ class ReservationType extends AbstractType
                 'choice_label' => 'ville',
                 'attr' =>[
                     "placeholder" => "Saisir la ville du club"
-                ]
+                ],
+                'required' =>false,
             ])
 
             ->add('coach',EntityType::class,[
@@ -63,7 +65,8 @@ class ReservationType extends AbstractType
                 'choice_label' => 'CoatchAvecClub',
                 'attr' =>[
                     "placeholder" => "Saisir le nom du coach"
-                ]
+                ],
+                'required' =>false,
             ])
         ;
     }

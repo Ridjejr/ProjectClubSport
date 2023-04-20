@@ -4,8 +4,11 @@ namespace App\Controller\Admin;
 
 use App\Entity\Reservation;
 use App\Form\ReservationType;
+use App\Model\FiltreReservation;
+use App\Form\FiltreReservationType;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\ReservationRepository;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -16,11 +19,20 @@ class ReservationController extends AbstractController
     /**
      * @Route("/admin/reservations", name="admin_reservations", methods={"GET"})
      */
-    public function listeReservations(ReservationRepository $repo)
+    public function listeReservations(ReservationRepository $repo, PaginatorInterface $paginator, Request $request)
     {
-        $reservations=$repo->findAll();
+        $filtre = new FiltreReservation();
+        $formFiltreReservation=$this->createForm(FiltreReservationType::class, $filtre);
+        $formFiltreReservation->handleRequest($request);
+        // $reservations=$paginator->paginate(
+        //     $repo->listeReserationsCompletePaginee($filtre),
+        //     $request->query->getInt('page', 1), /*page number*/
+        //     9/*limit per page*/
+        // );
+        $reservations=$repo->listeReservationsCompletPaginee($filtre);
         return $this->render('Admin/reservations/listeReservations.html.twig', [
-            'lesReservations' => $reservations
+            'lesReservations' => $reservations,
+            'formFiltreReservation'=>$formFiltreReservation->createView()
         ]);
     }
 

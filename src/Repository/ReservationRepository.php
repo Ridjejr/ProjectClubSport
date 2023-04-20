@@ -3,8 +3,9 @@
 namespace App\Repository;
 
 use App\Entity\Reservation;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use App\Model\FiltreReservation;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @extends ServiceEntityRepository<Reservation>
@@ -39,28 +40,45 @@ class ReservationRepository extends ServiceEntityRepository
         }
     }
 
-//    /**
-//     * @return Reservation[] Returns an array of Reservation objects
-//     */
-//    public function listeReservationsComplete($value): array
-//    {
-//        return $this->createQueryBuilder('r')
-//            ->andWhere('r.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('r.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+   /**
+    */
+   public function listeReservationsCompletPaginee(FiltreReservation $filtre=null)
+   {
+    $query =$this->createQueryBuilder('r')
+           ->select('r','adh','coa','clu')
+           ->Join('r.adherent', 'adh')
+           ->Join('r.coach', 'coa')
+           ->Join('r.club', 'clu')
+           ->orderBy('clu.ville', 'ASC');
+            if (!empty($filtre->nom)) {
+                $query->andWhere('adh.nom like :nomcherche')
+                ->setParameter('nomcherche', "%{$filtre->nom}%");
+            }
+            if (!empty($filtre->club)) {
+                $query->andWhere('r.club = :clubcherche')
+                ->setParameter('clubcherche', $filtre->club);
+            }
+            if (!empty($filtre->coachs)) {
+                $query->andWhere('r.coach = :coachcherche')
+                ->setParameter('coachcherche', $filtre->coachs);
+            }
+            // if (!empty($filtre->coachs) && $filtre->coachs->count()>0) {
+            //     $conditions=[];
+            //     foreach ($filtre->coachs as $key => $coach) {
+            //         $conditions[] = $query->where("r.coach=coachRecherche$key");
+            //         $query->setParameter("coachRecherche$key", $coach);
+            //     }
+            //     $blocConditionsOr=$query->expr()->orX()->addMultiple($conditions);
+            //     $query->andWhere($blocConditionsOr);
+            //     // foreach ($filtre->coachs as $key => $coach) {
+            //     //     $query->andWhere($query->expr()->orX(
+            //     //         $query->expr()->eq('r.coach',$coach)
+                        
+            //     //     ));
+            // }
+        ;
 
-//    public function findOneBySomeField($value): ?Reservation
-//    {
-//        return $this->createQueryBuilder('r')
-//            ->andWhere('r.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+       return $query->getQuery()->getResult();
+   }
+
 }
